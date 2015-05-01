@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PKE Meter</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0, minimal-ui" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <style>
+
+    body { background-color: black; margin: 0; padding: 0; }
+    body * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    [screen] {
+      width: 640px;
+      height: 880px;
+    }
+    [screen] > [coordinate] {
+      margin: 0;
+      padding: 0;
+
+      width: 64px;
+      height: 88px;
+
+      border: solid 0 rgba(0,255,0,0.8);
+      border-width: 1px 0 1px 1px;
+
+      display: inline-block;
+      float: left;
+    }
+    [screen] div:nth-child(10n+10) {
+      border-right-width: 1px;
+    }
+    [screen] div:nth-child(n+91) {
+      border-bottom-width: 1px;
+    }
+
+    [coordinate].sweep {
+      background-color: rgba(240,240,0,0.8) !important;
+    }
+    [coordinate='8'].sweep.on {
+      background-color: rgba(210,0,0,0.8) !important;
+    }
+
+    [coordinate='8'].on {
+      background-color: rgba(0,255,0,0.8);
+    }
+    [coordinate='7'].on {
+      background-color: rgba(0,255,0,0.7);
+    }
+    [coordinate='6'].on {
+      background-color: rgba(0,255,0,0.6);
+    }
+    [coordinate='5'].on {
+      background-color: rgba(0,255,0,0.5);
+    }
+    [coordinate='4'].on {
+      background-color: rgba(0,255,0,0.4);
+    }
+    [coordinate='3'].on {
+      background-color: rgba(0,255,0,0.3);
+    }
+    [coordinate='2'].on {
+      background-color: rgba(0,255,0,0.2);
+    }
+    [coordinate='1'].on {
+      background-color: rgba(0,255,0,0.1);
+    }
+    [coordinate='0'].on {
+      background-color: rgba(0,255,0,0.0);
+    }
+    </style>
+  </head>
+  <body>
+
+  <div frame>
+    <div screen></div>
+    <div controls></div>
+  </div>
+
+  <audio src="pke-on.mp3" id="pke-on" loop="true" volume="0.2"></audio>
+  <audio src="goggles-on.mp3" id="pke-start"></audio>
+  <audio src="pke-detect.mp3" id="pke-detect" loop="true"></audio>
+  <audio src="pke-detect.mp3" id="pke-detect-one"></audio>
+
+    <script src="jquery.min.js"></script>
+    <script src="gyro.min.js"></script>
+    <script src="howler.min.js"></script>
+    <script>
+    (function (undefined) {
+
+      var root = this;
+
+      // expedite ios audio
+      // Howler.enableiOSAudioAsap();
+
+      function randomInt(min,max) {
+        return Math.round(min + (Math.random() * (max - min)));
+      }
+
+      function setPoint (point, clazz, value) {
+        var element = point.el;
+        point.on = true;
+        element.addClass(clazz);
+        if (value) {
+          element.attr('coordinate',value);
+        }
+      }
+
+      function fadePoints () {
+        $('[coordinate].on').each(function () {
+
+          var $c = $(this),
+            v = parseInt($c.attr('coordinate'),10);
+
+          if (v > 0) {
+            $c.attr('coordinate',v - 1);
+          } else {
+            $c.removeClass('on');
+            $c.attr('coordinate','');
+            $c.data('point').on = false;
+          }
+
+        });
+      }
+
+      function meterLoop () {
+        var pke = this,
+          point = pke.randomPoint();
+
+        setPoint(point, 'on', 8);
+        fadePoints();
+      }
+      
+      var PKE = {
+
+        meterTick: 2,
+        sweepTick: 0.8,
+        proximityTick: 0.5,
+
+        controls: {
+          $screen: undefined,
+          muted: false,
+          on: false
+        },
+
+        sounds: {
+          on: null,
+          start: null,
+          detect: null,
+          detectOne: null
+        },
+
+        points: [],
+        loops: [],
+
+        init: function () {
+
+          var pke = this,
+            sounds = this.sounds,
+            controls = this.controls,
+
+            xarray, element, point, x, y;
+
+          controls.$screen = $('[screen]');
+
+          sounds.start = new Howl({
+            urls: ['goggles-on.mp3'],
+            onend: function () { sounds.on.play(); }
+          });
+
+          sounds.on = new Howl({
+            urls: ['pke-on.mp3'],
+            loop: true
+          });
+          sounds.detect = new Howl({
+            urls: ['pke-detect.mp3'],
+            loop: true
+          });
+          sounds.detect.paused = false;
+          sounds.detect.stopped = true;
+          // sounds.detectOne = new Howl({
+          //   urls: ['pke-detect.mp3']
+          // });
+
+          for (x = 0; x < 10; x++) {
+            xarray = [];
+            this.points.push(xarray);
+            for (y = 0; y < 10; y++) {
+              element = $('<div coordinate></div>').appendTo(controls.$screen);
+              point = { x: x, y: y, on: false, el: element };
+              xarray.push(point);
+              element.data('point', point);
+            }
+          }
+
+          controls.$screen.on('click', this.switch.bind(this));
+
+        },
+
+        sweep: function (on) {
+          var pke = this;
+
+          if (on) {
+            var points = pke.points,
+
+              top = 4,
+              right = 5,
+              bottom = 5,
+              left = 4,
+
+              direction = 1,
+
+              loop = function () {
+
+                $('.sweep').removeClass('sweep');
+
+                points[left][top].el.addClass('sweep');
+                points[right][top].el.addClass('sweep');
+                points[left][bottom].el.addClass('sweep');
+                points[right][bottom].el.addClass('sweep');
+
+                top = top - 1*direction;
+                right = right + 1*direction;
+                bottom = bottom + 1*direction;
+                left = left - 1*direction;
+
+                if (top === 0 || top === 4) {
+                  direction = direction * -1;
+                }
+
+                // $detected = $('[coordinate="8"].sweep.on');
+
+                // if ($detected.size() > 0) {
+                //   pke.detect(true);
+                // }
+
+              };
+
+            pke.sweep.loop = pke.loop(loop, pke.sweepTick);
+
+          } else {
+            pke.pool(pke.sweep.loop);
+          }
+        },
+
+        meter: function (on) {
+
+          var pke = this,
+            loop = meterLoop.bind(pke);
+
+          if (on) {
+            pke.meter.loop = pke.loop(loop, pke.meterTick);
+          } else {
+            pke.mute(true);
+            pke.pool(pke.meter.loop);
+          }
+
+        },
+
+        proximitySensor: function (on) {
+
+          var pke = this,
+            sound = pke.sounds.detect;
+
+          if (on) {
+            
+            gyro.frequency = pke.proximityTick;
+
+            gyro.startTracking(function (o) {
+
+              if (o.beta > 50) {
+                
+                // console.log('detected', sound.paused, sound.stopped, pke.controls.muted);
+
+                if (sound.stopped || sound.paused) {
+                  if ( ! pke.controls.muted ) {
+                    sound.stopped = false;
+                    sound.play();
+                  }
+                  sound.paused = false;
+                }
+              } else {
+                if ( ! pke.controls.muted ) {
+                  sound.stopped = true;
+                  sound.stop();
+                }
+              }
+
+            });
+          } else {
+            sound.pause();
+            sound.paused = true;
+            gyro.stopTracking();
+          }
+
+        },
+
+        detect: function (single) {
+          if ( ! this.controls.muted ) {
+            this.sounds[single ? 'detectOne' : 'detect'].play();
+          }
+        },
+
+        switch: function (on) {
+
+          if (this.controls.on) {
+            this.off();
+          } else {
+            this.on();
+          }
+
+        },
+
+        clear: function () {
+          this.sounds.detect.pause();
+        },
+
+        mute: function (force) {
+          var sounds = this.sounds;
+          if (force == true || this.controls.muted == false) {
+            sounds.on.pause();
+            this.controls.muted = true;
+          } else {
+            sounds.on.play();
+            this.controls.muted = false;
+          }
+        },
+
+        on: function () {
+
+          this.sounds.start.play();
+
+          this.meter(true);
+          this.sweep(true);
+          this.proximitySensor(true);
+
+          this.controls.on = true;
+        },
+
+        off: function () {
+          this.meter(false);
+          this.sweep(false);
+          this.proximitySensor(false);
+
+          this.controls.on = false;
+        },
+
+        loop: function (fn, tick) {
+          return window.setInterval(fn, tick * 1000);
+        },
+
+        pool: function (loop) {
+          window.clearInterval(loop);
+        },
+
+        randomPoint: function () {
+          return this.points[randomInt(0,9)][randomInt(0,9)];
+        }
+
+      };
+
+      PKE.init();
+
+    }).call(this);
+
+    </script>
+  </body>
+</html>
