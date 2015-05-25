@@ -310,10 +310,10 @@ $(function (window, $, ko, undefined) {
 	// fields: self,yes_rsvp_count,maybe_rsvp_count,no_rsvp_count,comment_count
 	var cal1week = new MeetupData({
 			urls: [
-				{
-					heading: 'Springfield',
-					address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=Geek-Club-Alexandria&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=%2C1w&sig_id=9837694&sig=fd313fcf933711be759b4154c0d22e5416fb11f0'
-				},
+				// {
+				// 	heading: 'Springfield',
+				// 	address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=Geek-Club-Alexandria&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=%2C1w&sig_id=9837694&sig=fd313fcf933711be759b4154c0d22e5416fb11f0'
+				// },
 				{
 					heading: 'Fairfax',
 					address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=NoVAGeekClub&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=%2C1w&sig_id=9837694&sig=90997cca0c1153fb5f550b73ec46e4ed852e90c9'
@@ -328,7 +328,7 @@ $(function (window, $, ko, undefined) {
 	
 	var cal2week = new MeetupData({
 			urls: [
-				{ heading: 'Springfield', address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=Geek-Club-Alexandria&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=1w%2C3w&sig_id=9837694&sig=a18c118464a499e0b95088dbc0e1c1468794146b' },
+				// { heading: 'Springfield', address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=Geek-Club-Alexandria&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=1w%2C3w&sig_id=9837694&sig=a18c118464a499e0b95088dbc0e1c1468794146b' },
 				{ heading: 'Fairfax', address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=NoVAGeekClub&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=1w%2C3w&sig_id=9837694&sig=160a1d482e01f562360d45f680e171e1c03579a6'}
 			],
 			fn: processEvents,
@@ -340,7 +340,7 @@ $(function (window, $, ko, undefined) {
 
 	var cal1month = new MeetupData({
 			urls: [
-				{ heading: 'Springfield', address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=Geek-Club-Alexandria&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=3w%2C2m&sig_id=9837694&sig=ac8f28f208f0d2d19498b8d142ea07fc14767b66' },
+				// { heading: 'Springfield', address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=Geek-Club-Alexandria&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=3w%2C2m&sig_id=9837694&sig=ac8f28f208f0d2d19498b8d142ea07fc14767b66' },
 				{ heading: 'Fairfax', address: 'http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=NoVAGeekClub&format=json&page=50&desc=false&photo-host=public&offset=0&only=yes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count%2Cvenue%2Ctime%2Cduration%2Cevent_url%2Cname%2Cdescription%2Chow_to_find_us%2Cself&fields=self%2Cyes_rsvp_count%2Cmaybe_rsvp_count%2Cno_rsvp_count%2Ccomment_count%2Cwaitlist_count&time=3w%2C2m&sig_id=9837694&sig=ff1288220f8c94f0497c7e36748a1edfb5119971' }
 			],
 			fn: processEvents,
@@ -352,7 +352,7 @@ $(function (window, $, ko, undefined) {
 
 	var visitors = new MeetupData({
 			urls: [
-				{ heading: 'Springfield', address: 'http://api.meetup.com/2/members?group_id=1816338&order=visited&desc=true&offset=0&format=json&only=name%2Cvisited%2Cphoto%2Ccity%2Cstate%2Clat%2Clon%2Clink&page=25&sig_id=9837694&sig=ae1a18a3d3c4f8a173a861370c5625447130426f' },
+				// { heading: 'Springfield', address: 'http://api.meetup.com/2/members?group_id=1816338&order=visited&desc=true&offset=0&format=json&only=name%2Cvisited%2Cphoto%2Ccity%2Cstate%2Clat%2Clon%2Clink&page=25&sig_id=9837694&sig=ae1a18a3d3c4f8a173a861370c5625447130426f' },
 				{ heading: 'Fairfax', address: 'http://api.meetup.com/2/members?group_id=15235182&order=visited&desc=true&offset=0&photo-host=public&format=json&only=name%2Cvisited%2Cphoto%2Ccity%2Cstate%2Clat%2Clon%2Clink&page=25&sig_id=9837694&sig=1ebb654de0c37b531dd97d3bdd833137b996e51e' }
 			],
 			fn: processVisitors,
@@ -378,7 +378,7 @@ $(function (window, $, ko, undefined) {
 
 	var photos = new MeetupData({
 			urls: [
-				{ heading: 'Springfield', address: 'http://api.meetup.com/2/photo_albums?group_id=1816338&order=time&desc=desc&offset=0&format=json&only=created%2Calbum_photo%2Cphoto_album_id%2Ctitle&page=50&sig_id=9837694&sig=00258c74db6c4a160f02f18a0812ac56701f8557' },
+				// { heading: 'Springfield', address: 'http://api.meetup.com/2/photo_albums?group_id=1816338&order=time&desc=desc&offset=0&format=json&only=created%2Calbum_photo%2Cphoto_album_id%2Ctitle&page=50&sig_id=9837694&sig=00258c74db6c4a160f02f18a0812ac56701f8557' },
 				{ heading: 'Fairfax', address: 'http://api.meetup.com/2/photo_albums?group_id=15235182&order=time&desc=desc&offset=0&photo-host=public&format=json&only=created%2Calbum_photo%2Cphoto_album_id%2Ctitle&page=50&sig_id=9837694&sig=10da58953f17818056bf30198743a7fdcf3d8b00' }
 			],
 			fn: processPhotoAlbums,
