@@ -60,7 +60,11 @@ $(function (window, $, ko, undefined) {
 			{
 				labels: ['TV'],
 				icon: '/images/events/tv.jpg'
-			} /* ,
+			},
+			{
+				labels: ['Game of Thrones'],
+				icon: '/images/events.game-of-thrones.jpg'
+			}/* ,
 			{
 				labels: ['.*'],
 				icon: '/images/8bitglasses.jpg'
