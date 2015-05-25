@@ -10,7 +10,7 @@ $(function (window, $, ko, undefined) {
 				icon: '/images/events/tuesday.png'
 			},
 			{
-				labels: ['Board Games Night','Board & Social'],
+				labels: ['Board Games Night','Board & Social','Game Night'],
 				icon: '/images/events/friday.gif'
 			},
 			{
