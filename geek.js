@@ -63,7 +63,7 @@ $(function (window, $, ko, undefined) {
 			},
 			{
 				labels: ['Game of Thrones'],
-				icon: '/images/events.game-of-thrones.jpg'
+				icon: '/images/events/game-of-thrones.jpg'
 			}/* ,
 			{
 				labels: ['.*'],
