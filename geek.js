@@ -7,70 +7,70 @@ $(function (window, $, ko, undefined) {
 	var icons = [
 			{
 				labels: ['TARDIS','Doctor Who','The Doctor'],
-				icon: '/images/events/tuesday.png'
+				icon: 'images/events/tuesday.png'
 			},
 			{
 				labels: ['Board Games Night','Board & Social','Game Night'],
-				icon: '/images/events/friday.gif'
+				icon: 'images/events/friday.gif'
 			},
 			{
 				labels: ['Orchestra'],
-				icon: '/images/orchestra.png'
+				icon: 'images/orchestra.png'
 			},
 			{
 				labels: ['Nerf'],
-				icon: '/images/events/nerf.jpg'
+				icon: 'images/events/nerf.jpg'
 			},
 			{
 				labels: ['Rifftrax'],
-				icon: '/images/events/rifftrax.jpg'
+				icon: 'images/events/rifftrax.jpg'
 			},
 			{
 				labels: ['Thriller'],
-				icon: '/images/events/thriller.jpg'
+				icon: 'images/events/thriller.jpg'
 			},
 			{
 				labels: ['Geek Girl','Geek-Girl'],
-				icon: '/images/whovian-girl.jpg'
+				icon: 'images/whovian-girl.jpg'
 			},
 			{
 				labels: ['Heidirama'],
-				icon: '/images/dominion.jpg'
+				icon: 'images/dominion.jpg'
 			},
 			{
 				labels: ['Serenity','Firefly'],
-				icon: '/images/serenity.jpg'
+				icon: 'images/serenity.jpg'
 			},
 			{
 				labels: ['LEGO','Playdate','Kids'],
-				icon: '/images/playdate.jpg'
+				icon: 'images/playdate.jpg'
 			},
 			{
 				labels: ['Sex','Burlesque','Adult'],
-				icon: '/images/sexy.jpg'
+				icon: 'images/sexy.jpg'
 			},
 			{
 				labels: ['Graphic Novel','Comics','Comic'],
-				icon: '/images/events/comics.jpg'
+				icon: 'images/events/comics.jpg'
 			},
 			{
 				labels: ['Movie'],
-				icon: '/images/events/movies.jpg'
+				icon: 'images/events/movies.jpg'
 			},
 			{
 				labels: ['TV'],
-				icon: '/images/events/tv.jpg'
+				icon: 'images/events/tv.jpg'
 			},
 			{
 				labels: ['Game of Thrones'],
-				icon: '/images/events/game-of-thrones.jpg'
+				icon: 'images/events/game-of-thrones.jpg'
 			}/* ,
 			{
 				labels: ['.*'],
-				icon: '/images/8bitglasses.jpg'
+				icon: 'images/8bitglasses.jpg'
 			} */
 		],
-		iconMap = { default: '/images/8bitglasses.jpg' },
+		iconMap = { default: 'images/8bitglasses.jpg' },
 		scratch = [],
 		labelRE;
 
